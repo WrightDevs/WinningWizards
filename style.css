@@ -28,11 +28,10 @@ body{
 }
 #CTA{
   background-color: #39B56BFA;
-  width: 100%;
+  width: 95%;
   padding:1rem;
   text-align: center;
   border-radius: 10px;
-  transform: translate(5% , 0.5em);
   text-decoration:none;
 }
         .about-section {
@@ -180,6 +179,6 @@ body{
             font-size: 2rem;
         }
     }
-footer{
+    footer{
       text-align: center;
-}
+    }
