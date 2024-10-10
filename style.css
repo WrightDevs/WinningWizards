@@ -32,7 +32,7 @@ body{
   padding:1rem;
   text-align: center;
   border-radius: 10px;
-  transform: translate(5% , 1em);
+  transform: translate(5% , 0.5em);
   text-decoration:none;
 }
         .about-section {
