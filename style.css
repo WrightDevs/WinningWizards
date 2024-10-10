@@ -179,6 +179,47 @@ body{
             font-size: 2rem;
         }
     }
+       .faqs-section {
+        background: linear-gradient(145deg, #101010, #1f1f1f);
+        color: #fff;
+        border-radius: 15px;
+        padding: 60px 20px;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+
+    .accordion-button {
+        background-color: #222;
+        color: #00ff99;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+        text-shadow: 0 0 10px #00ff99;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: #00ccff;
+        color: #fff;
+    }
+
+    .accordion-button:hover {
+        background-color: #00ccff;
+        color: #fff;
+        transform: scale(1.05);
+    }
+
+    .accordion-body {
+        background-color: #333;
+        color: #ddd;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .faqs-section {
+            padding: 40px 15px;
+        }
+    }
     footer{
+      padding-top: 5em;
       text-align: center;
     }
