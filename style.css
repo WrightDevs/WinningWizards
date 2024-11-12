@@ -274,4 +274,15 @@ footer a:hover {
   .about-heading {
     font-size: 2.5rem;
   }
+}body {
+  margin: 0;
+  padding: 0;
+  background-color: black !important;
+  color: #fff;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
