@@ -185,7 +185,27 @@
     <p style="color: #00ff99;">&copy; 2024 Winning Wizards Community. All rights reserved.</p>
     <p style="color: #ddd;">Connect with us on <a href="https://twitter.com/i/communities/1814550011658547525" class="link" target="_blank">Twitter</a>, <a href="#" class="link" target="_blank">Twitch</a>, and <a href="#" class="link" target="_blank">Discord</a>.</p>
   </footer>
-<script src="script.js"></script>
+<script>
+  let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function autoSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }
+
+        setInterval(autoSlide, 6000); // Slide every 6 seconds
+        showSlide(currentIndex); // Show the first slide
+</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script> <!-- AOS JavaScript -->
   <script>
     AOS.init();
