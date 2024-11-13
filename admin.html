@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance System</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; }
+    .container { margin-top: 50px; }
+    #timer { font-size: 1.1rem; font-weight: bold; }
+    .table-wrapper { max-height: 400px; overflow-y: auto; }
+    .login-container { max-width: 400px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+
+<div id="loginSection" class="container login-container">
+  <h2 class="text-center mb-4">Admin Login</h2>
+  <form id="loginForm">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="adminUsername" class="form-control" placeholder="Enter Username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="adminPassword" class="form-control" placeholder="Enter Password" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Login</button>
+  </form>
+</div>
+
+<div id="attendanceSection" class="container" style="display: none;">
+  <h2 class="text-center mb-4">Attendance System</h2>
+
+  <!-- Attendance Form -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <form id="attendanceForm" class="form-inline justify-content-center">
+        <div class="form-group mr-3">
+          <label for="username" class="sr-only">Username</label>
+          <input type="text" id="username" class="form-control" placeholder="Enter Username" required>
+        </div>
+        <div class="form-group mr-3">
+          <label for="checkInCount" class="sr-only">Check-in Count</label>
+          <input type="number" id="checkInCount" class="form-control" value="1" min="1">
+        </div>
+        <button type="submit" class="btn btn-primary">Check In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Timer -->
+  <div id="timer" class="text-center mb-3">Time until next reset: 00:00:00</div>
+
+  <!-- Attendance Table -->
+  <div class="table-wrapper">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Check-ins</th>
+          <th>Tier</th>
+        </tr>
+      </thead>
+      <tbody id="attendanceTable"></tbody>
+    </table>
+  </div>
+
+  <!-- Download Button -->
+  <div class="text-center mt-3">
+    <button id="downloadAttendance" class="btn btn-secondary">Download Attendance as CSV</button>
+  </div>
+</div>
+
+<script>
+  // Admin credentials
+  const adminCredentials = {
+    username: 'admin',
+    password: 'admin123'
+  };
+
+  // Initial attendance data
+  const attendanceData = {
+    'DAVID LIZE': { checkInCount: 4, tier: 'Tier 1', checkInDays: [] },
+    'MECAYUZZ': { checkInCount: 4, tier: 'Tier 1', checkInDays: [] },
+    'JENNIFER': { checkInCount: 4, tier: 'Tier 1', checkInDays: [] },
+    'XENON': { checkInCount: 0, tier: 'Tier 8', checkInDays: [] },
+  };
+
+  const weekStartDate = new Date();
+
+  // Admin login form submission handler
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('adminUsername').value.trim();
+    const password = document.getElementById('adminPassword').value.trim();
+
+    // Validate credentials
+    if (username === adminCredentials.username && password === adminCredentials.password) {
+      document.getElementById('loginSection').style.display = 'none';
+      document.getElementById('attendanceSection').style.display = 'block';
+    } else {
+      alert('Invalid username or password.');
+    }
+  });
+
+  // Form submission handler for attendance check-in
+  document.getElementById('attendanceForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value.trim();
+    const checkInCount = parseInt(document.getElementById('checkInCount').value);
+
+    if (username) {
+      if (!attendanceData[username]) {
+        attendanceData[username] = { checkInCount: 0, tier: 'Tier 11', checkInDays: [] };
+      }
+
+      const today = new Date().toLocaleDateString();
+      if (!attendanceData[username].checkInDays.includes(today)) {
+        attendanceData[username].checkInDays.push(today);
+        attendanceData[username].checkInCount += checkInCount;
+      }
+
+      calculateTier(username);
+      updateAttendanceTable();
+
+      document.getElementById('username').value = '';
+      document.getElementById('checkInCount').value = '1';
+    } else {
+      alert('Please enter a username.');
+    }
+  });
+
+  // Tier calculation based on check-in count
+  function calculateTier(username) {
+    const checkInCount = attendanceData[username].checkInCount;
+    const checkInDays = attendanceData[username].checkInDays;
+
+    if (checkInDays.length === 1) {
+      if (checkInCount === 4) {
+        attendanceData[username].tier = 'Tier 1';
+      } else if (checkInCount === 3) {
+        attendanceData[username].tier = 'Tier 2';
+      } else if (checkInCount === 2) {
+        attendanceData[username].tier = 'Tier 3';
+      } else {
+        attendanceData[username].tier = 'Tier 4';
+      }
+    }
+  }
+
+  // Update attendance table with current data
+  function updateAttendanceTable() {
+    const tableBody = document.getElementById('attendanceTable');
+    tableBody.innerHTML = '';
+
+    for (const username in attendanceData) {
+      const row = tableBody.insertRow();
+      row.insertCell(0).innerText = username;
+      row.insertCell(1).innerText = attendanceData[username].checkInCount;
+      row.insertCell(2).innerText = attendanceData[username].tier;
+    }
+  }
+
+  // Countdown timer for weekly reset
+  function updateTimer() {
+    const now = new Date();
+    const nextReset = new Date(weekStartDate);
+    nextReset.setDate(nextReset.getDate() + (7 - nextReset.getDay()));
+
+    const timeDiff = nextReset - now;
+    const hours = Math.floor(timeDiff / 1000 / 60 / 60);
+    const minutes = Math.floor((timeDiff - (hours * 1000 * 60 * 60)) / 1000 / 60);
+    const seconds = Math.floor((timeDiff - (hours * 1000 * 60 * 60) - (minutes * 1000 * 60)) / 1000);
+
+    document.getElementById('timer').textContent = `Time until next reset: ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+  }
+
+  // Pad function for time formatting
+  function pad(num) {
+    return num < 10 ? '0' + num : num;
+  }
+
+  setInterval(updateTimer, 1000);
+
+  // Download attendance data as CSV
+  document.getElementById('downloadAttendance').addEventListener('click', function() {
+    const csvRows = [];
+    const headers = ['Username', 'Check-ins', 'Tier'];
+    csvRows.push(headers.join(','));
+
+    for (const username in attendanceData) {
+      const row = [
+        username,
+        attendanceData[username].checkInCount,
+        attendanceData[username].tier
+      ];
+      csvRows.push(row.join(','));
+    }
+
+    const csvContent = csvRows.join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'attendance.csv';
+    link.click();
+  });
+</script>
+
+</body>
+</html>
