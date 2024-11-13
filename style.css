@@ -286,3 +286,11 @@ footer a:hover {
   justify-content: center;
   flex-direction: column;
 }
+@font-face {
+  font-family: myfont;
+  src: url("kholic.otf");
+}
+
+#topic{
+  font-family: myfont;
+}
