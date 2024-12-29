@@ -44,7 +44,7 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 1000;
+      z-index: -1000;
     }
     .modal {
     display: none;
@@ -86,25 +86,14 @@
   </style>
 </head>
 <body>
-  <div id="myModal" class="modal">
+<div id="myModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <h2 style="color: #00ff99; text-shadow: 0 0 10px #00ff99;">🎄 Christmas Song 🎶</h2>
-    <p style="color: #555;">Enjoy the holiday spirit with this beautiful Christmas melody!</p>
-    <audio id="christmasSong">
-      <source src="song.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-    <button id="playButton" style="margin-top: 20px; padding: 10px 20px; background-color: #00ff99; color: #fff; border: none; cursor: pointer;">Play Christmas Song</button>
+    <h2 style="color: #00ff99; text-shadow: 0 0 10px #00ff99;">Celebrate Excellence 🎉</h2>
+    <p style="color: #555;">Welcome to the Winning Wizards Awards Ceremony. Discover the achievements that inspire greatness!</p>
+    <button id="playButton" style="margin-top: 20px; padding: 10px 20px; background-color: #00ff99; color: #fff; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Explore Awards</button>
   </div>
 </div>
-<!-- Pause Button -->
-<div id="pauseMusicButton" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
-  <button onclick="toggleMusic()" style="background-color: #ff0000; color: #fff; border: none; padding: 10px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); font-size: 20px; display: flex; align-items: center; justify-content: center;">
-    ⏸️
-  </button>
-</div>
-
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#" id="topic">Winning Wizards 🎄</a>
