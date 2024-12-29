@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awards & Achievements</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Helvetica', 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #6b5b95, #feb47b);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    h1.title {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+
+    /* Tabs Container */
+    .tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .tab {
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .tab input[type="radio"] {
+      display: none;
+    }
+
+    .tab label {
+      padding: 18px;
+      background: #2c3e50;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .tab label::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: #feb47b;
+      transition: transform 0.3s ease;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+    }
+
+    .tab label:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+    .tab input[type="radio"]:checked+label {
+      background: #feb47b;
+      color: #2c3e50;
+    }
+
+    .tab .content {
+      display: none;
+      padding: 20px;
+      background: #f9f9f9;
+      border-top: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .tab input[type="radio"]:checked~.content {
+      display: block;
+    }
+
+    /* Keyframe Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+a{
+  text-decoration: none;
+  color: #000;
+  font-family: monospace;
+  font-size: 20px;
+  letter-spacing: 2px
+}
+
+  #confetti-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 5px; /* Flat rectangular shape */
+      background: var(--color);
+      opacity: 0.9;
+      animation: fall linear infinite;
+      transform-origin: center;
+      z-index: 999;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg); /* Adds rotation for realism */
+        opacity: 0;
+      }
+    }
+    img{
+      width:100%;
+    }
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      h1.title {
+        font-size: 2.5rem;
+      }
+
+      .tabs {
+        flex-direction: column;
+      }
+
+      .tab label {
+        font-size: 1.1rem;
+        padding: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1.title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div id="confetti-container"></div>
+    <img src="undraw_awards_faq6.svg" alt="">
+    <h1 class="title">Our Prestigious Achievements</h1>
+    <div class="tabs">
+      <div class="tab">
+        <input type="radio" id="tab1" name="tab-control" checked>
+        <label for="tab1">Award 1: Best Mod</label>
+        <div class="content">
+          <h3>Exemplary Moderation</h3>
+          <p><strong>Recipient:</strong><a href="https://x.com/EChimereuc77496?t=z90VMU7_0kVHgKy3Q3PIgQ&s=09">EMMA</a></p>
+          <p>Awarded for maintaining high standards of moderation, ensuring a safe and inclusive environment for all members.</p>
+        </div>
+      </div>
+
+      <div class="tab">
+        <input type="radio" id="tab2" name="tab-control">
+        <label for="tab2">Award 2: Best OG WW Member</label>
+        <div class="content">
+          <h3>Outstanding Contribution</h3>
+          <p><strong>Recipient:</strong><a href="https://x.com/Arn0ld04_?t=jlbITM2H_nANVf5lJ9CuPw&s=09">ARNOLD</a></p>
+          <p>Recognized for exceptional dedication and contributions to the community, setting a benchmark for collaboration and excellence.</p>
+        </div>
+      </div>
+
+      <div class="tab">
+        <input type="radio" id="tab3" name="tab-control">
+        <label for="tab3">Award 3: Most Active Member</label>
+        <div class="content">
+          <h3>Unwavering Commitment</h3>
+          <p><strong>Recipient:</strong><a href="https://x.com/Freakisanikka?t=D4vkPdGvfg3byhjbjHV37Q&s=09">DESI</a></p>
+          <p>Celebrated for active engagement and remarkable participation, fostering a vibrant and dynamic community.</p>
+        </div>
+      </div>
+
+      <div class="tab">
+        <input type="radio" id="tab4" name="tab-control">
+        <label for="tab4">Award 4: Best VIP</label>
+        <div class="content">
+          <h3>Distinguished Support</h3>
+          <p><strong>Recipient:</strong><a href="https://x.com/NnaemekaOb51473?t=_5jy3RTzF5CyIoKr6EvwLA&s=09">NNAEMEKA</a></p>
+          <p>Honored for steadfast loyalty and support, significantly contributing to the success and growth of the platform.</p>
+        </div>
+      </div>
+
+      <div class="tab">
+        <input type="radio" id="tab5" name="tab-control">
+        <label for="tab5">Award 5: Best Newbie</label>
+        <div class="content">
+          <h3>Rising Star</h3>
+          <p><strong>Recipient:</strong><a href="https://x.com/Buike2ky?t=XJE3BhGClR83Ceqkr2Y4bQ&s=09">BUIKEXS</a></p>
+          <p>Recognized as a promising new member, demonstrating exceptional potential and enthusiasm within the community.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const confettiContainer = document.getElementById('confetti-container');
+    const colors = ['#ff0000', '#00ff00', '#0000ff', '#ff00ff', '#00ffff', '#ffff00'];
+
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.animationDuration = Math.random() * 2 + 3 + 's';
+      confetti.style.setProperty('--color', colors[Math.floor(Math.random() * colors.length)]);
+      confetti.style.transform = `rotate(${Math.random() * 360}deg)`; // Random initial rotation
+      confettiContainer.appendChild(confetti);
+
+      setTimeout(() => {
+        confetti.remove();
+      }, 5000); // Remove confetti after 5 seconds
+    }
+
+    setInterval(createConfetti, 100); // Generate confetti every 100ms
+  </script>
+</body>
+
+</html>
