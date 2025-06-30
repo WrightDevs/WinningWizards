@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://winningwizards.vercel.app/sitemap.xml
